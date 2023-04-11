@@ -1,5 +1,17 @@
 <html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script>
+      var loadFile = async function ( event ) {
+        var file = event.target.files[ 0 ];
+        var zip = new JSZip();
+        var zipFile = await zip.loadAsync( file );
+        var zipInfo = document.getElementById( 'zip-info' );
+        zipInfo.value = JSON.stringify( zipFile.files, null, 2 );
+      };
+    </script>
   <body>
-    Hello again~
+    <input type="file" onchange="loadFile(event)">
+    <textarea id="zip-info" rows="10" cols="50"></textarea>
   </body>
 </html>
